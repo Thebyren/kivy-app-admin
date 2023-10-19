@@ -1,0 +1,53 @@
+<DashBoard>:
+   
+<TemplateScreen>:
+    MDLabel:
+        text: "text"
+<main_screen>:
+    MDNavigationLayout:
+        id: nav_layout
+        ScreenManager:
+            MDScreen:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDTopAppBar:
+                        title:"Home"
+                        elevation:4
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state()]]
+
+                    ScreenManager:
+                        id:screen_manager
+                        DashBoard:
+                            id: dashboard
+                            name:"dashboard"
+                        TemplateScreen:
+                            id: clientes
+                            name:"clientes"
+        MDNavigationDrawer:
+            id: nav_drawer
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding:"9dp"
+                spacing:"8dp"
+                Image:
+                    source: "./assets/compras.jpg"
+                    size_hint: None, None
+                    size:"100dp","100dp"
+
+                ScrollView:
+                    MDList:
+                        OneLineIconListItem:
+                            text:"Dashboard"
+                            on_release:
+                                screen_manager.current = "dashboard"
+                                nav_drawer.set_state()
+                            IconLeftWidget:
+                                icon:"cart"
+                            
+                        OneLineIconListItem:
+                            text:"clientes"
+                            on_release:
+                                screen_manager.current = "clientes"
+                                nav_drawer.set_state()
+                            IconLeftWidget:
+                                icon:"cart"
