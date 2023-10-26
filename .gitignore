@@ -1,1 +1,3 @@
 .buildozer
+.venv
+.vscode

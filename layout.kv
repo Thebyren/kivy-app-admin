@@ -1,53 +1,594 @@
 <DashBoard>:
-   
-<TemplateScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing:"15dp"
+        MDBoxLayout:
+            size_hint: 1, .2
+            pos_hint: {'center_x': 0.5,'top': 1}
+            padding: "15dp"
+            MDBoxLayout:
+                md_bg_color: app.theme_cls.primary_dark
+                radius: 20
+                size_hint: 1, 0
+                pos_hint: {'x': 0, 'top': 1}
+                MDLabel:
+                    text: "centro de empresas"
+                    font_size:24
+                    halign: "center"
+                    theme_text_color: "Primary"
+                MDIcon:
+                    padding:"10dp"
+                    icon:"google-analytics"
+
+                    pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        MDBoxLayout:
+            size_hint:1,1
+            orientation: 'vertical'
+            pos_hint: {'right': 1,'top': 1}
+            ScrollView:
+                MDList:
+                    id:lista_empresa
+                    spacing:"15dp"
+                    padding:"10dp"
+                    TwoLineIconListItem:
+                        id:texto
+                        secondary_text: "agregue una nueva empresa"
+                        text:"Crear nueva empresa"
+                        on_release:root.presionado()
+                        IconLeftWidget:
+                            icon:"plus"
+                            on_release: root.show_dialog()
+<manage_client_screen>:
+    name:"manage_client_screen"
+    id:manage_client_screen
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: 'vertical'
+            spacing:"10dp"
+            padding:"20dp"
+            Card_client_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_client_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_client_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_client_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_client>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_client>:
+    name:"add_client"
+    id:add_client
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_client:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: 'vertical'
+            padding:"10dp"
+            spacing:"20dp"
+            MDTextField:
+                mode:"fill"
+                hint_text:"nombre del cliente"
+            MDTextField:
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                mode:"fill"
+                hint_text:"numero de telefono"
+            MDTextField:
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                mode:"fill"
+                multiline:True
+                hint_text:"comentarios sobre el cliente"
+
+            Guardar_cliente:
+                text:"guardar datos"
+                on_release:
+
+<Edit_client>:
+    name:"edit_client"
+    id:edit_client
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_client:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: 'vertical'
+            padding:"10dp"
+            spacing:"20dp"
+            MDTextField:
+                mode:"fill"
+                hint_text:"nombre del cliente"
+            MDTextField:
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                mode:"fill"
+                hint_text:"numero de telefono"
+            MDTextField:
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                mode:"fill"
+                multiline:True
+                hint_text:"comentarios sobre el cliente"
+
+            Guardar_cliente:
+                text:"guardar datos"
+                on_release:
+<List_client>:
+    name:"list_client"
+    id:list_client
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_client:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: 'vertical'
+            padding:"10dp"
+            spacing:"20dp"
+            MDTextField:
+                mode:"fill"
+                hint_text:"nombre del cliente"
+            MDTextField:
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                mode:"fill"
+                hint_text:"numero de telefono"
+            MDTextField:
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                mode:"fill"
+                multiline:True
+                hint_text:"comentarios sobre el cliente"
+
+            Guardar_cliente:
+                text:"guardar datos"
+                on_release:
+<View_client>:
+    name:"view_client"
+    id:view_client
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_client:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: 'vertical'
+            padding:"10dp"
+            spacing:"20dp"
+            MDTextField:
+                mode:"fill"
+                hint_text:"nombre del cliente"
+            MDTextField:
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                mode:"fill"
+                hint_text:"numero de telefono"
+            MDTextField:
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                mode:"fill"
+                multiline:True
+                hint_text:"comentarios sobre el cliente"
+
+            Guardar_cliente:
+                text:"guardar datos"
+                on_release:
+
+<Guardar_cliente>:
+    on_release: root.regresar()
+<Card_client_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
     MDLabel:
-        text: "text"
-<main_screen>:
-    MDNavigationLayout:
-        id: nav_layout
-        ScreenManager:
-            MDScreen:
+        text:"agregar nuevo cliente"
+<Card_client_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de cliente"
+<Card_client_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de clientes"
+<Card_client_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado cliente"
+
+<manage_invent_screen>:
+    name:"manage_invent_screen"
+    id:manage_invent_screen
+    MDBoxLayout:
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_dark
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+<manage_buy_screen>:
+    name:"manage_buy_screen"
+    id:manage_buy_screen
+    MDBoxLayout:
+        md_bg_color:app.theme_cls.primary_dark
+        Regresar_menu_empresa:
+        MDLabel:
+            id:label1
+            text: app.nombre
+        MDLabel:
+            id:label2
+            text: app.tipo
+<manage_provider_screen>:
+    name:"manage_provider_screen"
+    id:manage_provider_screen
+    MDBoxLayout:
+        md_bg_color:app.theme_cls.primary_dark
+        Regresar_menu_empresa:
+        MDLabel:
+            id:label1
+            text: app.nombre
+        MDLabel:
+            id:label2
+            text: app.tipo
+<manage_product_screen>:
+    name:"manage_product_screen"
+    id:manage_product_screen
+    MDBoxLayout:
+        md_bg_color:app.theme_cls.primary_dark
+        Regresar_menu_empresa:
+        MDLabel:
+            id:label1
+            text: app.nombre
+        MDLabel:
+            id:label2
+            text: app.tipo
+<manage_facture_screen>:
+    name:"manage_facture_screen"
+    id:manage_facture_screen
+    MDBoxLayout:
+        md_bg_color:app.theme_cls.primary_dark
+        Regresar_menu_empresa:
+        MDLabel:
+            id:label1
+            text: app.nombre
+        MDLabel:
+            id:label2
+            text: app.tipo
+<manage_report_screen>:
+    name:"manage_report_screen"
+    id:manage_report_screen
+    MDBoxLayout:
+        md_bg_color:app.theme_cls.primary_dark
+        Regresar_menu_empresa:
+        MDLabel:
+            id:label1
+            text: app.nombre
+        MDLabel:
+            id:label2
+            text: app.tipo
+<Regresar_menu_empresa>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<DialogContent>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDTextField:
+        id:nombre_empresa
+        hint_text: "nombre de la empresa"
+
+    MDTextField:
+        id:tipo_empresa
+        hint_text: "tipo de empresa"
+<menu_empresa>:
+    id:menu_empresa
+    name:"menu_empresa"
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            MDIconButton:
+                icon:"chevron-left"
+                on_release: root.change()
+                theme_icon_color:"Custom"
+                icon_color:app.theme_cls.primary_light
+            MDLabel:
+                text:root.nombre
+            MDLabel:
+                text:root.descripcion
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding:"10dp"
+            md_bg_color:app.theme_cls.primary_light
+            spacing:"20dp"
+
+            Card_type:
+                id:manage_client
+                tipo:"manejo de clientes"
+                on_release:root.ids.manage_client.manage_client()
+                img:"./assets/clientes.jpeg"
+            Card_type:
+                id:manage_invent
+                tipo:"manejo de inventario"
+                img:"./assets/inventario.png"
+                on_release:root.ids.manage_invent.manage_invent()
+            Card_type:
+                id:manage_buy
+                tipo:"manejo de compras"
+                img:"./assets/compras.jpg"
+                on_release:root.ids.manage_buy.manage_buy()
+            Card_type:
+                id:manage_provider
+                tipo:"manejo de proveedores"
+                img:"./assets/proveedores.png"
+                on_release:root.ids.manage_provider.manage_provider()
+            Card_type:
+                id:manage_product
+                tipo:"manejo de productos"
+                img:"./assets/productos.png"
+                on_release:root.ids.manage_product.manage_product()
+            Card_type:
+                id:manage_facture
+                tipo:"manejo de facturacion"
+                img:"./assets/facturacion.png"
+                on_release:root.ids.manage_facture.manage_facture()
+            Card_type:
+                id:manage_report
+                tipo:"manejo de reportes"
+                img:"./assets/reportes.png"
+                on_release:root.ids.manage_report.manage_report()
+<Card_type>:
+    ripple_behavior:True
+    MDLabel:
+        text:root.tipo
+        halign:"center"
+    FitImage:
+        source:root.img
+
+<IntegranteInfo>:
+    md_bg_color:app.theme_cls.primary_light
+    text: root.name
+    secondary_text: root.carnet
+    ImageLeftWidgetWithoutTouch:
+        source: root.img
+    #IconLeftWidgetWithoutTouch:
+    #    icon: "face-agent"
+<ItemListMenu>:
+    text: root.name
+    on_release:
+        app.root.ids.screen_manager.current = root.name
+        app.root.ids.nav_drawer.set_state()
+    IconLeftWidgetWithoutTouch:
+        icon: root.icon
+
+<TemplateScreen>:
+    BoxLayout:
+        size_hint: 1, 1
+        padding: "20dp"
+        MDCard:
+            md_bg_color: app.theme_cls.primary_dark
+            radius: 20
+            size_hint: 1, 0
+            pos_hint: {'x': 0, 'top': 1}
+            MDLabel:
+                text: root.texto
+                halign: "center"
+                theme_text_color: "Primary"
+                size_hint: .4, 1
+
+<InfoScreen>:
+    orientation: 'vertical'
+    BoxLayout:
+        size_hint: 1, .2
+        pos_hint: {'center_x': 0.5,'top': 1}
+        padding: "20dp"
+        MDCard:
+            md_bg_color: app.theme_cls.primary_dark
+            radius: 20
+            size_hint: 1, 0
+            pos_hint: {'x': 0, 'top': 1}
+            MDLabel:
+                text: root.texto
+                font_size:24
+                halign: "center"
+                theme_text_color: "Primary"
+                size_hint: .4, 0
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: 1, 1
+        padding:"15dp"
+        pos_hint: {'right': 1,'top': 1}
+        ScrollView:
+            MDList:
+                spacing:"15dp"
+                IntegranteInfo:
+                    name:"Luis Alejandro Jimenez Medrano"
+                    carnet:"0905-23-7312"
+                    img:"./assets/luis.png"
+
+                IntegranteInfo:
+                    name:"Kevin Emanol Medrano Castillo"
+                    carnet:"0905-23-7312"
+                    img:"./assets/medrano.png"
+
+                IntegranteInfo:
+                    name:"Byron Rene Pastor Flores"
+                    carnet:"0905-23-7312"
+                    img:"./assets/byron.png"
+
+                IntegranteInfo:
+                    name:"Victor Daniel Sosa Lopez"
+                    carnet:"0905-23-7312"
+                    img:"./assets/daniel.jpg"
+
+                IntegranteInfo:
+                    name:"Byron Yobani Escobar Quinonez"
+                    carnet:"0905-23-7312"
+                    img:"./assets/yobani.png"
+
+                IntegranteInfo:
+                    name:"Kevin Eduardo Salguero Monzon"
+                    carnet:"0905-23-7312"
+                    img:"./assets/kevin.png"
+<main_screen_manager>:
+    MDScreen:
+        name:"main_screen"
+        MDNavigationLayout:
+            id: nav_layout
+            MDScreenManager:
+                id:main_manager
+                MDScreen:
+                    name:"main_space"
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDTopAppBar:
+
+                            title: "Control Total"
+                            elevation: 4
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state()]]
+
+                        Tipos_menu:
+                            id: screen_manager
+                            DashBoard:
+                                id: dashboard
+                                name: "dashboard"
+                            TemplateScreen:
+                                texto: "Hola, ¿cómo estás?"
+                                name: "clientes"
+                            MDScreen:
+                                name: "creditos"
+                                InfoScreen:
+                                    texto: "Integrantes del grupo"
+
+
+            MDNavigationDrawer:
+                id: nav_drawer
                 MDBoxLayout:
                     orientation: 'vertical'
-                    MDTopAppBar:
-                        title:"Home"
-                        elevation:4
-                        left_action_items: [["menu", lambda x: nav_drawer.set_state()]]
+                    padding: "9dp"
+                    spacing: "8dp"
+                    MDNavigationDrawerMenu:
+                        size_hint:1,.35
+                        MDNavigationDrawerHeader:
+                            title:"Control total"
+                            md_text_color:"red"
+                            text:"Menu de opciones"
+                            source: "./assets/banner_icon.png"
+                            spacing:"4dp"
+                            padding:"12dp",0,0,0
 
-                    ScreenManager:
-                        id:screen_manager
-                        DashBoard:
-                            id: dashboard
-                            name:"dashboard"
-                        TemplateScreen:
-                            id: clientes
-                            name:"clientes"
-        MDNavigationDrawer:
-            id: nav_drawer
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding:"9dp"
-                spacing:"8dp"
-                Image:
-                    source: "./assets/compras.jpg"
-                    size_hint: None, None
-                    size:"100dp","100dp"
-
-                ScrollView:
-                    MDList:
-                        OneLineIconListItem:
-                            text:"Dashboard"
-                            on_release:
-                                screen_manager.current = "dashboard"
-                                nav_drawer.set_state()
-                            IconLeftWidget:
-                                icon:"cart"
-                            
-                        OneLineIconListItem:
-                            text:"clientes"
-                            on_release:
-                                screen_manager.current = "clientes"
-                                nav_drawer.set_state()
-                            IconLeftWidget:
-                                icon:"cart"
+                    ScrollView:
+                        MDList:
+                            ItemListMenu:
+                                name: "dashboard"
+                                icon: "bird"
+                            ItemListMenu:
+                                name: "clientes"
+                                icon: "apple"
+                            ItemListMenu:
+                                name: "creditos"
+                                icon: "information-outline"
