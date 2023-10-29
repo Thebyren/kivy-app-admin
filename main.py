@@ -1,4 +1,6 @@
 import json
+import datetime
+import app as manage
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
@@ -8,44 +10,349 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.app import StringProperty, ObjectProperty
 from kivymd.app import StringProperty as sp
 from kivy.config import Config
+from genereted import (Add_buy, Add_facture, Add_invent, Add_product, Add_provider, Add_report, Edit_product, Edit_provider, Edit_buy, Edit_facture, Edit_invent, Edit_report,View_invent, View_buy, View_report, View_provider, View_facture, View_product, List_buy, List_facture, List_invent, List_product, List_provider, List_report)
 from kivymd.uix.button import MDRaisedButton, MDIconButton
-from kivymd.uix.list import OneLineIconListItem,TwoLineAvatarIconListItem, IconRightWidget,IconLeftWidget,TwoLineIconListItem, IRightBodyTouch
+from kivymd.uix.list import OneLineIconListItem,ThreeLineAvatarIconListItem,TwoLineAvatarIconListItem, IconRightWidget,IconLeftWidget,TwoLineIconListItem
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.screenmanager import MDScreenManager
 Config.set('graphics', 'width', '360')
 Config.set('graphics', 'height', '760')
 Config.write()
+#pos_hint: { "center_x" : 0.5,"top":1}centro
+#pos_hint: { "center_x" : 0.5,"center_y": 0.5}merocentro
+def get_date():
+    return datetime.datetime.now().strftime("%Y-%m-%d")
+            
+
+class Guardar_invent(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_invent_screen"
+        campo = self.parent.parent.parent.ids
+        if campo.nombre.text !="":
+            print()
+            fecha=get_date()
+            consulta = "SELECT productoid from produtos where nombre = "+campo.nombre.text+";"
+            productoid = manage.obtener_registro("./base.db", consulta)
+            consulta = "INSERT INTO  inventario(productoid,exitencia, toempresa, fecha_ultima_actual, activo) values("+productoid+","+campo.existencia.text+",'"+app.nombre+"','"+fecha+"')"
+            manage.agregar_registro("./base.db",consulta)        
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Guardar_buy(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_buy_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        fecha = get_date()
+        manage.agregar_registro("./base.db","INSERT INTO buys(Nombre, correo, numero, direccion, nit,comentarios, toempresa, fecha_creacion, imagen, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.nit.text+"', '"+campo.comentario.text+"', '"+app.nombre+"', '"+fecha+"', NULL, 1)")        
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Guardar_provider(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_provider_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        manage.agregar_registro("./base.db","INSERT INTO proveedores(Nombre, correo, numero, direccion, sitio_web,toempresa, empresa, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.web.text+"', '"+app.name+"', '"+campo.empresa.text+"', 1)")        
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Guardar_product(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_product_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        fecha = datetime.datetime.now().strftime("%Y-%m-%d")
+        manage.agregar_registro("./base.db","INSERT INTO products(Nombre, correo, numero, direccion, nit,comentarios, toempresa, fecha_creacion, imagen, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.nit.text+"', '"+campo.comentario.text+"', '"+app.nombre+"', '"+fecha+"', NULL, 1)")        
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Guardar_facture(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_facture_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        fecha = datetime.datetime.now().strftime("%Y-%m-%d")
+        manage.agregar_registro("./base.db","INSERT INTO factures(Nombre, correo, numero, direccion, nit,comentarios, toempresa, fecha_creacion, imagen, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.nit.text+"', '"+campo.comentario.text+"', '"+app.nombre+"', '"+fecha+"', NULL, 1)")        
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Guardar_report(MDRaisedButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_report_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        fecha = datetime.datetime.now().strftime("%Y-%m-%d")
+        manage.agregar_registro("./base.db","INSERT INTO reports(Nombre, correo, numero, direccion, nit,comentarios, toempresa, fecha_creacion, imagen, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.nit.text+"', '"+campo.comentario.text+"', '"+app.nombre+"', '"+fecha+"', NULL, 1)")        
+        app.root.remove_widget(self.parent.parent.parent)
+
 class Guardar_cliente(MDRaisedButton):
     def regresar(self):
         app = MDApp.get_running_app()
         app.root.current = "manage_client_screen"
+        campo = self.parent.parent.parent.ids
+        if campo.nombre.text !="":
+            print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+            fecha = datetime.datetime.now().strftime("%Y-%m-%d")
+            manage.agregar_registro("./base.db","INSERT INTO Clientes(Nombre, correo, numero, direccion, nit,comentarios, toempresa, fecha_creacion, imagen, activo)VALUES('"+campo.nombre.text+"', '"+campo.mail.text+"', '"+campo.telefono.text+"', '"+campo.address.text+"', '"+campo.nit.text+"', '"+campo.comentario.text+"', '"+app.nombre+"', '"+fecha+"', NULL, 1)")        
         app.root.remove_widget(self.parent.parent.parent)
+class Modificar_cliente(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_client_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_cliente("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+
+
 class Add_client(MDScreen):
     def on_enter(self):
         app = MDApp.get_running_app()
         self.ids.label1.text = app.nombre
         self.ids.label2.text = app.tipo
+    
 class Edit_client(MDScreen):
     def on_enter(self):
         app = MDApp.get_running_app()
         self.ids.label1.text = app.nombre
         self.ids.label2.text = app.tipo
+    def buscar(self):
+        app = MDApp.get_running_app()
+        app.nombre
+        cliente_id = self.ids.search.text
+        if cliente_id is not None:
+            client = manage.obtener_cliente("./base.db", cliente_id, app.nombre)
+            if client is not None:
+                self.ids.nombre.text = client[1]
+                self.ids.mail.text = client[2]
+                self.ids.telefono.text = client[3]
+                self.ids.address.text = client[4]
+                self.ids.nit.text = client[5]
+                self.ids.comentario.text = client[6]
+            else:
+                # Si no se encontró el cliente, asigna "No se encontró" a todos los campos
+                self.ids.nombre.text = "No se encontró"
+                self.ids.mail.text = "No se encontró"
+                self.ids.telefono.text = "No se encontró"
+                self.ids.address.text = "No se encontró"
+                self.ids.nit.text = "No se encontró"
+                self.ids.comentario.text = "No se encontró"
+
+        
 class List_client(MDScreen):
+    def eliminar_cliente(self, instance):
+        print("borrando ")
+        item = instance.parent.parent
+        self.ids.lista.remove_widget(item)
+        cliente_id = int(item.secondary_text.split("|")[0])
+        manage.eliminar_cliente("./base.db", cliente_id)
     def on_enter(self):
         app = MDApp.get_running_app()
         self.ids.label1.text = app.nombre
         self.ids.label2.text = app.tipo
+        print(app.nombre, app.tipo)
+        rows = manage.consulta_general("./base.db","SELECT * FROM clientes where toempresa = '"+app.nombre+"' and activo = 1")
+        for row in rows:
+            self.ids.lista.add_widget(
+                ThreeLineAvatarIconListItem(
+                    IconLeftWidget(
+                        icon="account"
+                    ),
+                    IconRightWidget(
+                        icon="delete",
+                        on_release=lambda instance: self.eliminar_cliente(instance)
+                    ),
+                    radius=[20, 20, 20, 0],
+                    bg_color=(0, 0.6, 0.4, 1),
+                    text=row[1]+" | "+row[3],
+                    secondary_text=row[0].__str__()+" | "+row[6],
+                    tertiary_text=row[2],
+                    
+                    )
+                )
+            
+
 class View_client(MDScreen):
     def on_enter(self):
         app = MDApp.get_running_app()
         self.ids.label1.text = app.nombre
         self.ids.label2.text = app.tipo
-
+    def buscar(self):
+        app = MDApp.get_running_app()
+        app.nombre
+        myid = self.ids.myid.text
+        if myid is not None:
+            client = manage.obtener_cliente("./base.db", myid, app.nombre)
+            if client is not None:
+                id_ = str(client[0])
+                self.ids.cliente_id_.text="Id:  "+ id_
+                self.ids.nombre.text = "Nombre:  "+client[1]
+                self.ids.mail.text ="Correo Electronico:  "+ client[2]
+                self.ids.telefono.text = "Telefono:  "+client[3]
+                self.ids.address.text = "Direccion:  "+client[4]
+                self.ids.nit.text = "NIT:  "+client[5]
+                self.ids.comentario.text ="Estado:  "+ client[6]
+                self.ids.fecha_creacion.text ="fecha ingreso:  "+ str(client[8])
+                self.ids.myid.text = ""
+            else:
+                self.ids.myid.text =""
+                self.ids.cliente_id_.text = "no se encontró"
+                self.ids.nombre.text = "No se encontró"
+                self.ids.mail.text = "No se encontró"
+                self.ids.telefono.text = "No se encontró"
+                self.ids.address.text = "No se encontró"
+                self.ids.nit.text = "No se encontró"
+                self.ids.comentario.text = "No se encontró"
+                self.ids.fecha_creacion.text= "no se encontró"
+class Regresar_invent(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_invent_screen"
+        app.root.remove_widget(self.parent.parent.parent)
+class Regresar_product(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_product_screen"
+        app.root.remove_widget(self.parent.parent.parent)
+class Regresar_facture(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_facture_screen"
+        app.root.remove_widget(self.parent.parent.parent)
+class Regresar_buy(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_buy_screen"
+        app.root.remove_widget(self.parent.parent.parent)
+class Regresar_provider(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_provider_screen"
+        app.root.remove_widget(self.parent.parent.parent)
 class Regresar_client(MDIconButton):
     def regresar(self):
         app = MDApp.get_running_app()
         app.root.current = "manage_client_screen"
         app.root.remove_widget(self.parent.parent.parent)
+class Regresar_report(MDIconButton):
+    def regresar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_report_screen"
+        app.root.remove_widget(self.parent.parent.parent)
+
+
+class Modificar_invent(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_invent_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_invent("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+class Modificar_buy(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_buy_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_buy("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+class Modificar_provider(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_provider_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_provider("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+class Modificar_product(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_product_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_product("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+class Modificar_facture(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_facture_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_facture("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+class Modificar_report(MDRaisedButton):
+    def alterar(self):
+        app = MDApp.get_running_app()
+        app.root.current = "manage_report_screen"
+        campo = self.parent.parent.parent.ids
+        print(campo.nombre.text, campo.telefono.text, campo.nit.text, campo.address.text, campo.comentario.text)
+        nuevos_datos = {
+        'nombre': campo.nombre.text,
+        'correo': campo.mail.text,
+        'numero': campo.telefono.text,
+        'direccion': campo.address.text,
+        'nit': campo.nit.text,
+        'comentarios': campo.comentario.text,
+        }
+        manage.modificar_report("./base.db",campo.search.text, app.nombre, nuevos_datos)
+        app.root.remove_widget(self.parent.parent.parent)
+
 class Card_client_add(MDCard):
     def add(self):
         app = MDApp.get_running_app()
@@ -80,7 +387,223 @@ class Card_client_view(MDCard):
             )
         )
         app.root.current ="view_client"
+class Card_invent_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nuevo inventario para: ", app.nombre)
+        app.root.add_widget(
+            Add_invent(
+            )
+        )
+        app.root.current = "add_invent"
 
+class Card_invent_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nuevo inventario para: ", app.nombre)
+        app.root.add_widget(
+            Edit_invent(
+            )
+        )
+        app.root.current = "edit_invent"
+
+class Card_invent_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_invent(
+            )
+        )
+        app.root.current = "list_invent"
+
+class Card_invent_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_invent(
+            )
+        )
+        app.root.current = "view_invent"
+
+class Card_buy_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Add_buy(
+            )
+        )
+        app.root.current = "add_buy"
+class Card_facture_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Add_facture(
+            )
+        )
+        app.root.current = "add_buy"
+class Card_report_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Add_report(
+            )
+        )
+        app.root.current = "add_buy"
+
+class Card_buy_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Edit_buy(
+            )
+        )
+        app.root.current = "edit_buy"
+class Card_facture_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Edit_facture(
+            )
+        )
+        app.root.current = "edit_facture"
+class Card_report_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nueva compra para: ", app.nombre)
+        app.root.add_widget(
+            Edit_report(
+            )
+        )
+        app.root.current = "edit_report"
+
+class Card_buy_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_buy(
+            )
+        )
+        app.root.current = "list_buy"
+
+class Card_buy_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_buy(
+            )
+        )
+        app.root.current = "view_buy"
+
+class Card_product_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_product(
+            )
+        )
+        app.root.current = "view_product"
+class Card_facture_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_facture(
+            )
+        )
+        app.root.current = "view_facture"
+class Card_report_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_report(
+            )
+        )
+        app.root.current = "view_report"
+class Card_provider_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nuevo proveedor para: ", app.nombre)
+        app.root.add_widget(
+            Add_provider(
+            )
+        )
+        app.root.current = "add_provider"
+
+class Card_provider_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nuevo proveedor para: ", app.nombre)
+        app.root.add_widget(
+            Edit_provider(
+            )
+        )
+        app.root.current = "edit_provider"
+
+class Card_provider_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_provider(
+            )
+        )
+        app.root.current = "list_provider"
+
+class Card_facture_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_facture(
+            )
+        )
+        app.root.current = "list_facture"
+class Card_provider_view(MDCard):
+    def view(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            View_provider(
+            )
+        )
+        app.root.current = "view_provider"
+
+class Card_product_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_product(
+            )
+        )
+        app.root.current = "list_product"
+
+class Card_report_list(MDCard):
+    def list(self):
+        app = MDApp.get_running_app()
+        app.root.add_widget(
+            List_report(
+            )
+        )
+        app.root.current = "list_report"
+class Card_product_add(MDCard):
+    def add(self):
+        app = MDApp.get_running_app()
+        print("nuevo producto para: ", app.nombre)
+        app.root.add_widget(
+            Add_product(
+            )
+        )
+        app.root.current = "add_product"
+class Card_product_edit(MDCard):
+    def edit(self):
+        app = MDApp.get_running_app()
+        print("nuevo producto para: ", app.nombre)
+        app.root.add_widget(
+            Edit_product(
+            )
+        )
+        app.root.current = "edit_provider"
 class manage_client_screen(MDScreen):
     def on_enter(self):
         app = MDApp.get_running_app()
@@ -185,6 +708,7 @@ class Card_type(MDCard):
         app.root.current ="manage_report_screen"
 
 class Main(MDApp):
+    
     nombre=""
     tipo=""
     def build(self):
@@ -335,6 +859,7 @@ class DashBoard(MDScreen):
         print("borrando ")
         item = instance.parent.parent
         self.ids.lista_empresa.remove_widget(item)
+        manage.eliminar_empresa("./base",item.text)
         empresa_a_eliminar = next(
             e for e in self.empresas if e["nombre"] == item.text and e["tipo"] == item.secondary_text
         )

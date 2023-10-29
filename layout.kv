@@ -85,6 +85,7 @@
     name:"add_client"
     id:add_client
     MDBoxLayout:
+        elevation:1
         orientation: 'vertical'
         MDBoxLayout:
             orientation:"horizontal"
@@ -99,33 +100,46 @@
                 id:label2
                 text:app.tipo
         MDBoxLayout:
+            pos_hint: {'center_x': 0.5,'top':1}
             md_bg_color:app.theme_cls.primary_dark
             orientation: 'vertical'
-            padding:"10dp"
+            padding:("10dp","5dp","5dp","110dp")
             spacing:"20dp"
             MDTextField:
+                id:nombre
                 mode:"fill"
                 hint_text:"nombre del cliente"
             MDTextField:
+                id:mail
                 mode:"fill"
                 hint_text:"correo electronico"
                 helper_text:"user@gmail.com"
                 validator:"email"
             MDTextField:
+                id:telefono
                 mode:"fill"
                 hint_text:"numero de telefono"
             MDTextField:
+                id:address
                 mode:"fill"
                 hint_text:"direccion de facturacion"
             MDTextField:
+                id:nit
+                mode:"fill"
+                hint_text:"nit"
+            MDTextField:
+                id:comentario
                 mode:"fill"
                 multiline:True
                 hint_text:"comentarios sobre el cliente"
-
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
             Guardar_cliente:
                 text:"guardar datos"
-                on_release:
-
+<Modificar_cliente>:
+    on_release:root.alterar()
 <Edit_client>:
     name:"edit_client"
     id:edit_client
@@ -144,32 +158,63 @@
                 id:label2
                 text:app.tipo
         MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_cliente:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id del cliente"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
             md_bg_color:app.theme_cls.primary_dark
             orientation: 'vertical'
-            padding:"10dp"
+            padding:("10dp","5dp","5dp","110dp")
             spacing:"20dp"
-            MDTextField:
-                mode:"fill"
-                hint_text:"nombre del cliente"
-            MDTextField:
-                mode:"fill"
-                hint_text:"correo electronico"
-                helper_text:"user@gmail.com"
-                validator:"email"
-            MDTextField:
-                mode:"fill"
-                hint_text:"numero de telefono"
-            MDTextField:
-                mode:"fill"
-                hint_text:"direccion de facturacion"
-            MDTextField:
-                mode:"fill"
-                multiline:True
-                hint_text:"comentarios sobre el cliente"
-
-            Guardar_cliente:
-                text:"guardar datos"
-                on_release:
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del cliente"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:mail
+                    hint_text:"correo electronico"
+                    helper_text:"user@gmail.com"
+                    validator:"email"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:telefono
+                    hint_text:"numero de telefono"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:address
+                    hint_text:"direccion de facturacion"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nit
+                    hint_text:"nit"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:comentario
+                    multiline:True
+                    hint_text:"comentarios sobre el cliente"
+            MDBoxLayout:
+                size_hint_y:.3
+        
 <List_client>:
     name:"list_client"
     id:list_client
@@ -188,32 +233,14 @@
                 id:label2
                 text:app.tipo
         MDBoxLayout:
+            pos_hint: {'center_x': 0.5,'top':1}
             md_bg_color:app.theme_cls.primary_dark
             orientation: 'vertical'
-            padding:"10dp"
-            spacing:"20dp"
-            MDTextField:
-                mode:"fill"
-                hint_text:"nombre del cliente"
-            MDTextField:
-                mode:"fill"
-                hint_text:"correo electronico"
-                helper_text:"user@gmail.com"
-                validator:"email"
-            MDTextField:
-                mode:"fill"
-                hint_text:"numero de telefono"
-            MDTextField:
-                mode:"fill"
-                hint_text:"direccion de facturacion"
-            MDTextField:
-                mode:"fill"
-                multiline:True
-                hint_text:"comentarios sobre el cliente"
-
-            Guardar_cliente:
-                text:"guardar datos"
-                on_release:
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
 <View_client>:
     name:"view_client"
     id:view_client
@@ -232,33 +259,80 @@
                 id:label2
                 text:app.tipo
         MDBoxLayout:
+            pos_hint: {'center_x': 0.5,'top':1}
             md_bg_color:app.theme_cls.primary_dark
             orientation: 'vertical'
-            padding:"10dp"
+            padding:("10dp","5dp","5dp","110dp")
             spacing:"20dp"
-            MDTextField:
-                mode:"fill"
-                hint_text:"nombre del cliente"
-            MDTextField:
-                mode:"fill"
-                hint_text:"correo electronico"
-                helper_text:"user@gmail.com"
-                validator:"email"
-            MDTextField:
-                mode:"fill"
-                hint_text:"numero de telefono"
-            MDTextField:
-                mode:"fill"
-                hint_text:"direccion de facturacion"
-            MDTextField:
-                mode:"fill"
-                multiline:True
-                hint_text:"comentarios sobre el cliente"
-
-            Guardar_cliente:
-                text:"guardar datos"
-                on_release:
-
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del cliente"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: cliente_id_
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+                
+                MDLabel:
+                    md_bg_color:app.theme_cls.bg_normal
+                    radius:[15,15,15,15]
+                    padding:"5dp"
+                    size_hint_y:None
+                    size:self.texture_size
+                    id: mail
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: telefono
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: address
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nit
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: comentario
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: fecha_creacion
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
 <Guardar_cliente>:
     on_release: root.regresar()
 <Card_client_add>:
@@ -290,79 +364,6 @@
     MDLabel:
         text:"ver datos de un empleado cliente"
 
-<manage_invent_screen>:
-    name:"manage_invent_screen"
-    id:manage_invent_screen
-    MDBoxLayout:
-        MDBoxLayout:
-            md_bg_color:app.theme_cls.primary_dark
-            Regresar_menu_empresa:
-            MDLabel:
-                id:label1
-                text: app.nombre
-            MDLabel:
-                id:label2
-                text: app.tipo
-<manage_buy_screen>:
-    name:"manage_buy_screen"
-    id:manage_buy_screen
-    MDBoxLayout:
-        md_bg_color:app.theme_cls.primary_dark
-        Regresar_menu_empresa:
-        MDLabel:
-            id:label1
-            text: app.nombre
-        MDLabel:
-            id:label2
-            text: app.tipo
-<manage_provider_screen>:
-    name:"manage_provider_screen"
-    id:manage_provider_screen
-    MDBoxLayout:
-        md_bg_color:app.theme_cls.primary_dark
-        Regresar_menu_empresa:
-        MDLabel:
-            id:label1
-            text: app.nombre
-        MDLabel:
-            id:label2
-            text: app.tipo
-<manage_product_screen>:
-    name:"manage_product_screen"
-    id:manage_product_screen
-    MDBoxLayout:
-        md_bg_color:app.theme_cls.primary_dark
-        Regresar_menu_empresa:
-        MDLabel:
-            id:label1
-            text: app.nombre
-        MDLabel:
-            id:label2
-            text: app.tipo
-<manage_facture_screen>:
-    name:"manage_facture_screen"
-    id:manage_facture_screen
-    MDBoxLayout:
-        md_bg_color:app.theme_cls.primary_dark
-        Regresar_menu_empresa:
-        MDLabel:
-            id:label1
-            text: app.nombre
-        MDLabel:
-            id:label2
-            text: app.tipo
-<manage_report_screen>:
-    name:"manage_report_screen"
-    id:manage_report_screen
-    MDBoxLayout:
-        md_bg_color:app.theme_cls.primary_dark
-        Regresar_menu_empresa:
-        MDLabel:
-            id:label1
-            text: app.nombre
-        MDLabel:
-            id:label2
-            text: app.tipo
 <Regresar_menu_empresa>:
     icon:"chevron-left"
     on_release: root.regresar()
@@ -507,12 +508,12 @@
                 spacing:"15dp"
                 IntegranteInfo:
                     name:"Luis Alejandro Jimenez Medrano"
-                    carnet:"0905-23-7312"
+                    carnet:"0905-23-2307"
                     img:"./assets/luis.png"
 
                 IntegranteInfo:
                     name:"Kevin Emanol Medrano Castillo"
-                    carnet:"0905-23-7312"
+                    carnet:"0905-23-8229"
                     img:"./assets/medrano.png"
 
                 IntegranteInfo:
@@ -522,17 +523,17 @@
 
                 IntegranteInfo:
                     name:"Victor Daniel Sosa Lopez"
-                    carnet:"0905-23-7312"
+                    carnet:"0905-23-8230"
                     img:"./assets/daniel.jpg"
 
                 IntegranteInfo:
                     name:"Byron Yobani Escobar Quinonez"
-                    carnet:"0905-23-7312"
+                    carnet:"0905-23-6691"
                     img:"./assets/yobani.png"
 
                 IntegranteInfo:
                     name:"Kevin Eduardo Salguero Monzon"
-                    carnet:"0905-23-7312"
+                    carnet:"0905-23-6639"
                     img:"./assets/kevin.png"
 <main_screen_manager>:
     MDScreen:
@@ -592,3 +593,1791 @@
                             ItemListMenu:
                                 name: "creditos"
                                 icon: "information-outline"
+
+<manage_invent_screen>:
+    name:"manage_invent_screen"
+    id:manage_invent_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_invent_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_invent_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_invent_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_invent_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_invent>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_invent>:
+    name:"add_invent"
+    id:add_invent
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_invent:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del producto"
+            MDTextField:
+                id:existencia
+                mode:"fill"
+                hint_text:"existencia"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_invent:
+                text:"guardar datos"
+<Modificar_invent>:
+    on_release:root.alterar()
+<Edit_invent>:
+    name:"edit_invent"
+    id:edit_invent
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_invent:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_invent:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id del registro"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del producto"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:existencia
+                    hint_text:"existencia"
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_invent>:
+    name:"list_invent"
+    id:list_invent
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_invent:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_invent>:
+    name:"view_invent"
+    id:view_invent
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_invent:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del invent"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: invent_id_
+
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: existencia
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: fecha
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_invent>:
+    on_release: root.regresar()
+<Card_invent_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo inventario"
+<Card_invent_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar inventario"
+<Card_invent_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver nivel de inventario"
+<Card_invent_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos especificos de inventario"
+
+<manage_buy_screen>:
+    name:"manage_buy_screen"
+    id:manage_buy_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_buy_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_buy_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_buy_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_buy_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_buy>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_buy>:
+    name:"add_buy"
+    id:add_buy
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_buy:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del proveedor"
+           
+            MDTextField:
+                id:monto
+                mode:"fill"
+                hint_text:"monto"
+            MDTextField:
+                id:cantidad
+                mode:"fill"
+                hint_text:"cantidad"
+            MDTextField:
+                id:descripcion
+                mode:"fill"
+                hint_text:"descripcion"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_buy:
+                text:"guardar datos"
+<Modificar_buy>:
+    on_release:root.alterar()
+<Edit_buy>:
+    name:"edit_buy"
+    id:edit_buy
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_buy:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_buy:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id de la compra"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del producto"
+    
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:monto
+                    hint_text:"monto"
+               
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:cantidad
+                    hint_text:"cantidad"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:descripcion
+                    hint_text:"descripcion"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:proveedor
+                    hint_text:"nombre proveedor"
+                
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_buy>:
+    name:"list_buy"
+    id:list_buy
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_buy:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_buy>:
+    name:"view_buy"
+    id:view_buy
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_buy:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del buy"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: buy_id_
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: proveedor
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: monto
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: cantidad
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: descripcion
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: descripcion
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: fecha
+                
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_buy>:
+    on_release: root.regresar()
+<Card_buy_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo buy"
+<Card_buy_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de buy"
+<Card_buy_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de buys"
+<Card_buy_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado buy"
+
+<manage_provider_screen>:
+    name:"manage_provider_screen"
+    id:manage_provider_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_provider_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_provider_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_provider_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_provider_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_provider>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_provider>:
+    name:"add_provider"
+    id:add_provider
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_provider:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del proveedor"
+            MDTextField:
+                id:mail
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                id:empresa
+                mode:"fill"
+                hint_text:"nombre empresa"
+            MDTextField:
+                id:address
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                id:telefono
+                mode:"fill"
+                hint_text:"telefono"
+            MDTextField:
+                id:web
+                mode:"fill"
+                multiline:True
+                hint_text:"sitio web"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_provider:
+                text:"guardar datos"
+<Modificar_provider>:
+    on_release:root.alterar()
+<Edit_provider>:
+    name:"edit_provider"
+    id:edit_provider
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_provider:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_provider:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id del proveedor"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del proveedor"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:mail
+                    hint_text:"correo electronico"
+                    helper_text:"user@gmail.com"
+                    validator:"email"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:telefono
+                    hint_text:"numero de telefono"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:address
+                    hint_text:"direccion de facturacion"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:web
+                    hint_text:"sitio web"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:empresa
+                    multiline:True
+                    hint_text:"nombre empresa"
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_provider>:
+    name:"list_provider"
+    id:list_provider
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_provider:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_provider>:
+    name:"view_provider"
+    id:view_provider
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_provider:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del provider"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: provider_id_
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+                
+                MDLabel:
+                    md_bg_color:app.theme_cls.bg_normal
+                    radius:[15,15,15,15]
+                    padding:"5dp"
+                    size_hint_y:None
+                    size:self.texture_size
+                    id: mail
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: telefono
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: address
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: web
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: empresa
+            
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_provider>:
+    on_release: root.regresar()
+<Card_provider_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo provider"
+<Card_provider_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de provider"
+<Card_provider_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de providers"
+<Card_provider_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado provider"
+
+<manage_product_screen>:
+    name:"manage_product_screen"
+    id:manage_product_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_product_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_product_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_product_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_product_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_product>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_product>:
+    name:"add_product"
+    id:add_product
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_product:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del producto"
+            MDTextField:
+                id:mail
+                mode:"fill"
+                hint_text:"precio"
+                helper_text:"00.00"
+            MDTextField:
+                id:categoria
+                mode:"fill"
+                hint_text:"categoria del producto"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_product:
+                text:"guardar datos"
+<Modificar_product>:
+    on_release:root.alterar()
+<Edit_product>:
+    name:"edit_product"
+    id:edit_product
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_product:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_product:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id del producto"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del producto"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:precio
+                    hint_text:"precio"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:categoria
+                    hint_text:"categoria del producto"
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_product>:
+    name:"list_product"
+    id:list_product
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_product:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_product>:
+    name:"view_product"
+    id:view_product
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_product:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del producto"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: product_id_
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+                
+                MDLabel:
+                    md_bg_color:app.theme_cls.bg_normal
+                    radius:[15,15,15,15]
+                    padding:"5dp"
+                    id: categoria
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: precio
+            
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nit
+            
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_product>:
+    on_release: root.regresar()
+<Card_product_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo product"
+<Card_product_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de product"
+<Card_product_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de products"
+<Card_product_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado product"
+
+<manage_facture_screen>:
+    name:"manage_facture_screen"
+    id:manage_facture_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_facture_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_facture_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_facture_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_facture_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_facture>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_facture>:
+    name:"add_facture"
+    id:add_facture
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_facture:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del cliente"
+            
+            MDTextField:
+                id:total
+                mode:"fill"
+                hint_text:"total"
+            MDTextField:
+                id:vendedor
+                mode:"fill"
+                hint_text:"id del vendedor"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_facture:
+                text:"guardar datos"
+<Modificar_facture>:
+    on_release:root.alterar()
+<Edit_facture>:
+    name:"edit_facture"
+    id:edit_facture
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_facture:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_facture:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id de la factura"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"cliente"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:address
+                    hint_text:"direccion de facturacion"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:total
+                    hint_text:"total"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:vendedor
+                    hint_text:"id del vendedor"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:empresa
+                    multiline:True
+                    hint_text:"empresa de emision"
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_facture>:
+    name:"list_facture"
+    id:list_facture
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_facture:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_facture>:
+    name:"view_facture"
+    id:view_facture
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_facture:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id de la factura"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: facture_id_
+
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nit
+                            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: direccion
+                            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: empresa
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: Total
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: fecha
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: impuesto
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: vendedor
+                
+                
+                
+                
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_facture>:
+    on_release: root.regresar()
+<Card_facture_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo facture"
+<Card_facture_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de facture"
+<Card_facture_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de factures"
+<Card_facture_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado facture"
+
+<manage_report_screen>:
+    name:"manage_report_screen"
+    id:manage_report_screen
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_menu_empresa:
+            MDLabel:
+                id:label1
+                text: app.nombre
+            MDLabel:
+                id:label2
+                text: app.tipo
+        MDBoxLayout:
+            md_bg_color:app.theme_cls.primary_light
+            orientation: "vertical"
+            spacing:"10dp"
+            padding:"20dp"
+            Card_report_add:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_report_edit:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_report_list:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+            Card_report_view:
+                padding:"20dp"
+                spacing:"20dp"
+                ripple_behavior:True
+<Regresar_report>:
+    icon:"chevron-left"
+    on_release: root.regresar()
+    theme_icon_color:"Custom"
+    icon_color:app.theme_cls.primary_light
+<Add_report>:
+    name:"add_report"
+    id:add_report
+    MDBoxLayout:
+        elevation:1
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_report:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDTextField:
+                id:nombre
+                mode:"fill"
+                hint_text:"nombre del report"
+            MDTextField:
+                id:mail
+                mode:"fill"
+                hint_text:"correo electronico"
+                helper_text:"user@gmail.com"
+                validator:"email"
+            MDTextField:
+                id:telefono
+                mode:"fill"
+                hint_text:"numero de telefono"
+            MDTextField:
+                id:address
+                mode:"fill"
+                hint_text:"direccion de facturacion"
+            MDTextField:
+                id:nit
+                mode:"fill"
+                hint_text:"nit"
+            MDTextField:
+                id:comentario
+                mode:"fill"
+                multiline:True
+                hint_text:"comentarios sobre el report"
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+            Guardar_report:
+                text:"guardar datos"
+<Modificar_report>:
+    on_release:root.alterar()
+<Edit_report>:
+    name:"edit_report"
+    id:edit_report
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_report:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            size_hint_y:None
+            height:"80dp"
+            md_bg_color:app.theme_cls.primary_light
+            padding:"15dp"
+            spacing:"10dp"
+            Modificar_report:
+                text:"guardar datos"
+            MDTextField:
+                mode:"fill"
+                id:search
+                hint_text:"id del report"
+            MDIconButton:
+                text_color:0,0,0,1
+                icon:"clipboard-text-search-outline"
+                on_release: root.buscar()
+        MDBoxLayout:
+            size_hint_y:.5
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nombre
+                    hint_text:"nombre del report"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:mail
+                    hint_text:"correo electronico"
+                    helper_text:"user@gmail.com"
+                    validator:"email"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:telefono
+                    hint_text:"numero de telefono"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:address
+                    hint_text:"direccion de facturacion"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:nit
+                    hint_text:"nit"
+            MDBoxLayout:
+                MDTextField:
+                    mode:"fill"
+                    id:comentario
+                    multiline:True
+                    hint_text:"comentarios sobre el report"
+            MDBoxLayout:
+                size_hint_y:.3
+        
+<List_report>:
+    name:"list_report"
+    id:list_report
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_report:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            ScrollView:
+                MDList:
+                    padding:"15dp"
+                    spacing:"10dp"
+                    id:lista
+<View_report>:
+    name:"view_report"
+    id:view_report
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation:"horizontal"
+            size_hint_y:None
+            height:"50dp"
+            md_bg_color:app.theme_cls.bg_normal
+            Regresar_report:
+            MDLabel:
+                id:label1
+                text:app.nombre
+            MDLabel:
+                id:label2
+                text:app.tipo
+        MDBoxLayout:
+            pos_hint:{"center_x":0.5, "top":1}
+            md_bg_color:app.theme_cls.primary_dark
+            orientation: "vertical"
+            padding:("10dp","5dp","5dp","110dp")
+            spacing:"20dp"
+            MDBoxLayout:
+                size_hint_y:None
+                height:"70dp"
+                padding:"10dp"
+                radius:[15,15,15,15]
+                md_bg_color:app.theme_cls.bg_normal
+                MDTextField:
+                    id:myid
+                    hint_text:"id del report"
+                MDIconButton:
+                    icon:"search-web"
+                    on_release:root.buscar()
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing:"15dp"
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: report_id_
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nombre
+                
+                MDLabel:
+                    md_bg_color:app.theme_cls.bg_normal
+                    radius:[15,15,15,15]
+                    padding:"5dp"
+                    size_hint_y:None
+                    size:self.texture_size
+                    id: mail
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: telefono
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: address
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: nit
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: comentario
+            
+                MDLabel:
+                    padding:"15dp"
+                    radius:[15,15,15,15]
+                    md_bg_color:app.theme_cls.bg_normal
+                    id: fecha_creacion
+        MDBoxLayout:
+            size_hint_y:.3
+            md_bg_color:app.theme_cls.primary_dark
+            padding:"20dp"
+<Guardar_report>:
+    on_release: root.regresar()
+<Card_report_add>:
+    on_release: root.add()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-plus"
+    MDLabel:
+        text:"agregar nuevo report"
+<Card_report_edit>:
+    on_release:root.edit()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-edit"
+    MDLabel:
+        text:"editar datos de report"
+<Card_report_list>:
+    on_release:root.list()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"format-list-text"
+    MDLabel:
+        text:"ver lista de reports"
+<Card_report_view>:
+    on_release:root.view()
+    MDIcon:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        icon:"account-search"
+    MDLabel:
+        text:"ver datos de un empleado report"

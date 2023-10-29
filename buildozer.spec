@@ -7,13 +7,13 @@ title = Control Total
 package.name = totalControl
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.control
+package.domain = com.control.total
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,jpeg, gif, svg, json
+source.include_exts = py,png,jpg,kv,atlas,jpeg, gif, svg, json, db
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,7 +37,7 @@ version = 0.2
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.1.0,kivymd, sdl2_ttf==2.0.15, pillow
+requirements = python3,kivy==2.1.0,kivymd, sdl2_ttf==2.0.15, pillow, sqlite3
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
