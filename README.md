@@ -17,4 +17,5 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
-
+#### apk instalable en las siguientes arquitecturas
+./bin/app.apk
