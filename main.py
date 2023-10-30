@@ -32,9 +32,9 @@ class Guardar_invent(MDRaisedButton):
         if campo.nombre.text !="":
             print()
             fecha=get_date()
-            consulta = "SELECT productoid from produtos where nombre = "+campo.nombre.text+";"
-            productoid = manage.obtener_registro("./base.db", consulta)
-            consulta = "INSERT INTO  inventario(productoid,exitencia, toempresa, fecha_ultima_actual, activo) values("+productoid+","+campo.existencia.text+",'"+app.nombre+"','"+fecha+"')"
+            productoid = manage.obtener_inventario("./base.db",campo.nombre.text, app.nombre)
+            print(productoid)
+            consulta = "INSERT INTO inventario(productoid,existencia, toempresa, fecha_ultima_actualizacion, activo) values("+str(productoid[0])+","+campo.existencia.text+",'"+app.nombre+"','"+fecha+"',1)"
             manage.agregar_registro("./base.db",consulta)        
         app.root.remove_widget(self.parent.parent.parent)
 
@@ -224,6 +224,7 @@ class Regresar_invent(MDIconButton):
         app = MDApp.get_running_app()
         app.root.current = "manage_invent_screen"
         app.root.remove_widget(self.parent.parent.parent)
+        
 class Regresar_product(MDIconButton):
     def regresar(self):
         app = MDApp.get_running_app()

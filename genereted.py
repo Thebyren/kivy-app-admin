@@ -42,15 +42,28 @@ class List_invent(MDScreen):
         print("borrando ")
         item = instance.parent.parent
         self.ids.lista.remove_widget(item)
-        invent_id = int(item.secondary_text.split("|")[0])
+        invent_id = int(item.text.split(":")[0])
+        print(invent_id)
         manage.eliminar_invent("./base.db", invent_id)
     def on_enter(self):
         app = MDApp.get_running_app()
         self.ids.label1.text = app.nombre
         self.ids.label2.text = app.tipo
         print(app.nombre, app.tipo)
-        consulta = "SELECT i.productoid, i.existencia, i.fecha_ultima_actual, p.nombre, p.categoria FROM inventario AS i JOIN productos AS p on i.productoid = p.productoid WHERE p.toempresa = "+app.nombre+" AND p.activo =  "+str(1)+";"
+        consulta = """ SELECT DISTINCT
+        i.productoid,
+        i.existencia,
+        i.fecha_ultima_actualizacion,
+        p.nombre,
+        p.Categoría
+    FROM inventario AS i
+    INNER JOIN productos AS p ON i.productoid = p.productoid
+    WHERE i.activo = 1
+      AND p.activo = 1"""
+        
         rows = manage.consulta_general("./base.db",consulta)
+        print(rows)
+        print(len(rows)) 
         for row in rows:
             self.ids.lista.add_widget(
                 ThreeLineAvatarIconListItem(
@@ -59,13 +72,13 @@ class List_invent(MDScreen):
                     ),
                     IconRightWidget(
                         icon="delete",
-                        #on_release=lambda instance: self.eliminar_invent(instance)
+                        on_release=lambda instance: self.eliminar_invent(instance)
                     ),
                     radius=[20, 20, 20, 0],
                     bg_color=(0, 0.6, 0.4, 1),
-                    text=row[1],
-                    secondary_text=row[2],
-                    tertiary_text=row[3].__str__(),                    
+                    text="ID:"+str(row[0])+"  Nombre:"+str(row[3]),
+                    secondary_text="Categoria"+str(row[4])+"  existencia:"+str(row[1]),
+                    tertiary_text="Actualizacio en:"+str(row[2]),          
                     )
                 )
             

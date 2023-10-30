@@ -9,6 +9,17 @@ def eliminar_cliente(db,id):
         con.close()
     except:
         print("error en borrar la empresa")
+def eliminar_invent(db,id):
+    try:
+        con = sqlite3.connect(db)
+        cursor = con.cursor()
+        consulta = (f"UPDATE clientes SET activo = 0 WHERE inventarioid = '{id}';")
+        cursor.execute(consulta)
+        con.commit()
+        con.close()
+    except:
+        print("error en borrar la empresa")
+
 def obtener_cliente(db, id, empresa):
     try:
         con = sqlite3.connect(db)
@@ -24,9 +35,25 @@ def obtener_cliente(db, id, empresa):
             print("No se encontraron resultados para el cliente con nombre:", empresa)
             return None  # o puedes devolver un valor predeterminado, según tus necesidades
     except Exception as e:
-        print("Error en obtener_cliente:", str(e))
+        print("linea 12 Error en obtener_cliente:", str(e))
         return None
-
+def obtener_inventario(db,nombre, empresa):
+    try:
+        con = sqlite3.connect(db)
+        cursor = con.cursor()
+        consulta = "SELECT productoid, nombre, precio, toempresa, activo FROM productos WHERE activo = 1 AND nombre = ? AND toempresa = ?;"
+        cursor.execute(consulta, (nombre, empresa))
+        producto = cursor.fetchone()
+        con.close()
+        
+        if producto is not None:
+            return producto
+        else:
+            print("No se encontraron resultados para el producto de:", empresa)
+            return None  # o puedes devolver un valor predeterminado, según tus necesidades
+    except Exception as e:
+        print("Error en obtener inventario", str(e))
+        return None
         
 
 def eliminar_empresa(db,empresa):
@@ -49,8 +76,8 @@ def consulta_general(db,consulta):
         cursor.execute(consulta)
         return cursor.fetchall()
         
-    except:
-        return "no hay nada"
+    except Exception as e:
+        return print("Error en consulta generarl ", str(e))
 def agregar_registro(db, consulta):
     try:
         con = sqlite3.connect(db)
@@ -58,9 +85,8 @@ def agregar_registro(db, consulta):
         cursor.execute(consulta)
         con.commit()
         con.close()
-    except:
-        print("error en el insert")
-
+    except Exception as e:
+        print("linea 70 Error en modificar_cliente:", str(e))
 
 def modificar_(db, id, empresa, nuevos_datos):
     try:
@@ -78,7 +104,7 @@ def modificar_(db, id, empresa, nuevos_datos):
         
         print("Cliente modificado con éxito")
     except Exception as e:
-        print("Error en modificar_cliente:", str(e))
+        print(" linea 80: Error en modificar_cliente:", str(e))
 def modificar_cliente(db, id, empresa, nuevos_datos):
     try:
         con = sqlite3.connect(db)
@@ -95,7 +121,7 @@ def modificar_cliente(db, id, empresa, nuevos_datos):
         
         print("Cliente modificado con éxito")
     except Exception as e:
-        print("Error en modificar_cliente:", str(e))
+        print("linea 97 Error en modificar_cliente:", str(e))
 
 def obtener_registro(db,consulta ):
     try:
@@ -104,7 +130,6 @@ def obtener_registro(db,consulta ):
         cursor.execute(consulta)
         con.close()
         return cursor.fetchone()
-        
     except:
         return 0
     
