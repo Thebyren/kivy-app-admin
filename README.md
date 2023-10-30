@@ -1,5 +1,5 @@
 # presentacion:
-<video width="630" height="300" src="https://youtu.be/edcPNME7d5s"></video>
 ## instalacion:
+[![Video de YouTube](https://img.youtube.com/vi/edcPNME7d5s/0.jpg)](https://youtu.be/edcPNME7d5s)
 
 pip in
