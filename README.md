@@ -5,7 +5,6 @@
 ## requerimientos
 
 sistema macOS, linux o windows con Python >= 3.7
-sqlite3
 
 ### instalacion de modulos necesarios
 
